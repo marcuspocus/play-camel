@@ -1,0 +1,96 @@
+h1. Camel Module for Play! Framework 
+
+h2. About this module
+
+p. This module aim at integrating "EIP pattern":http://www.eaipatterns.com/toc.html into the Play! Framework.
+
+h2. Components of this module
+
+* A JMS Broker: "ActiveMQ":http://activemq.apache.org/
+* A EIP Context: "Camel":http://camel.apache.org/
+
+h2. Installing module
+
+* Using conf/dependencies.yaml and adding a dependency: 
+bc. play -> camel 1.0
+
+* Using conf/application.conf and adding a module: 
+bc. module.camel=${play.path}/modules/camel-1.0
+
+h2. Getting dependencies
+
+p. You need to *{color:red}make sure you are able to retreive all dependencies* for this module, or it won't work. Dependencies are fetched from mavenCentral and "Maven Dev Space":http://maven.dspace.org/snapshot/
+
+bc. play dependencies --sync
+
+h2. Configuring
+
+p. Not much to configure, all required settings have defaults values.
+
+h3. List of properties user can override
+
+table{border:1px solid black}.
+{background:#ccc}.|_.Key|_.Default|_.Description|
+|camel.name|play-camel|Name for the CamelContext object|
+{background:#eee}.|broker.name|play-activemq|Name for the ActiveMQ Broker|
+|broker.connector|tcp://localhost:61616|host:port that will be exposed by the ActiveMQ Connector|
+{background:#eee}.|broker.url|vm:localhost|URL used for instanciating an embedded broker|
+
+h2. Using @Inject
+
+p. You can inject @CamelContext@ into any class by using "JSR299":http://jcp.org/en/jsr/detail?id=299:
+
+bc. 
+@Inject
+private static CamelContext context
+
+A good place is in a Bootstrap class, a class that extends @Job@ and has the @OnApplicationStart@ annotation:
+
+bc. 
+@OnApplicationStart
+public class Bootstrap extends Job {
+...
+}
+
+h2. Making your first @Route@
+
+p. In the previous class in which you injected @CamelContext@, you can then use the "Camel DSL":http://camel.apache.org/dsl.html which support:
+
+* Java
+* Scala
+* Spring XML[1]
+
+h3. RouteBuilder : Where it all begin...
+
+p. I recommend you to read the "architecture":http://camel.apache.org/architecture.html documentation if you need more than this _basic_ example.
+
+p. Here is a sample route you can test easily
+
+bc. 
+// Prepare the route
+RouteBuilder routes = new RouteBuilder() {
+	@Override
+	public void configure() throws Exception {
+		from("file:///Users/marcus/tmp/INBOX").id("myInbox").log("Sending to JMS").to("activemq:testQueue");
+		from("activemq:testQueue").id("myFakeEMail").log("Sending Email").to("log:myLogCategory?level=INFO&showBody=true");
+	}
+};
+
+p. The 1st route simply check for files in my INBOX directory, and then send the content to the @testQueue@ JMS queue. The 2nd route listen for incoming messages, then send the content to a log category. The @to@ part could have been a ftp, a smtp, or a bean (a @processor@ in Camel terms...) 
+
+p. After the routes are created, you can then deploy them using the @RouteBuilder@ class you created directly in @CamelContext@:
+
+bc. 
+// Add them to camel-context
+ctx.addRoutes(routes);
+
+
+h2. Conclusion
+
+p. *You now have a fully fonctionning EIP + an embedde JMS Broker right on your Play! application*.
+
+??Have fun ;-)??, Marc
+
+
+
+fn1. Notes : This module support only Java DSL for now.
