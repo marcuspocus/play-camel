@@ -12,9 +12,11 @@ h2. Components of this module
 h2. Installing module
 
 * Using conf/dependencies.yaml and adding a dependency: 
+
 bc. play -> camel 1.0
 
 * Using conf/application.conf and adding a module: 
+
 bc. module.camel=${play.path}/modules/camel-1.0
 
 h2. Getting dependencies
@@ -64,7 +66,7 @@ h3. RouteBuilder : Where it all begin...
 
 p. I recommend you to read the "architecture":http://camel.apache.org/architecture.html documentation if you need more than this _basic_ example.
 
-p. Here is a sample route you can test easily
+p. Here is a sample route you can test easily:
 
 bc. 
 // Prepare the route
@@ -87,7 +89,7 @@ ctx.addRoutes(routes);
 
 h2. Conclusion
 
-p. *You now have a fully fonctionning EIP + an embedde JMS Broker right on your Play! application*.
+p. *You now have a fully fonctionning EIP + an embedded JMS Broker right on your Play! application*.
 
 ??Have fun ;-)??, Marc
 
