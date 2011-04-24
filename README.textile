@@ -12,9 +12,11 @@ h2. Components of this module
 h2. Installing module
 
 * Using conf/dependencies.yaml and adding a dependency: 
+
 bc. play -> camel 1.0
 
 * Using conf/application.conf and adding a module: 
+
 bc. module.camel=${play.path}/modules/camel-1.0
 
 h2. Getting dependencies
