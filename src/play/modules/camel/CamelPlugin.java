@@ -1,6 +1,16 @@
 package play.modules.camel;
 
+import java.net.InetSocketAddress;
+import java.net.URI;
+
+import org.apache.activemq.broker.Broker;
+import org.apache.activemq.broker.BrokerContext;
 import org.apache.activemq.broker.BrokerService;
+import org.apache.activemq.broker.TransportConnector;
+import org.apache.activemq.command.BrokerInfo;
+import org.apache.activemq.transport.TransportAcceptListener;
+import org.apache.activemq.transport.TransportServer;
+import org.apache.activemq.transport.TransportServerSupport;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.activemq.ActiveMQComponent;
@@ -26,7 +36,7 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				broker.setAdvisorySupport(false);
 				broker.setUseJmx(true);
 				broker.setBrokerName(Play.configuration.getProperty("broker.name", "play-activemq"));
-				broker.addConnector(Play.configuration.getProperty("broker.connector", "tcp://localhost:61616"));
+				broker.addConnector(Play.configuration.getProperty("broker.connector", "nio://localhost:61616"));
 				broker.start();
 				Logger.info("ActiveMQ Broker started...");
 			}
@@ -41,7 +51,6 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 			}
 
 		} catch (Exception e) {
-			//Logger.error(e, "Exception on initialization: %s", e.getMessage());
 			throw new ExceptionInInitializerError(e);
 		}
 		Injector.inject(this);
@@ -51,6 +60,10 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 	public void onApplicationStop() {
 		try {
 			ctx.shutdown();
+			while(!ctx.isStopped()){
+				Thread.sleep(100);
+			}
+			Logger.info("Camel & ActiveMQ Services are now stopped");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -63,13 +76,24 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getBeanOfType(Class<T> clazz) {
-		Logger.info("CamelContext Injection...");
 		if (clazz.equals(CamelContext.class)) {
-			Logger.info("CamelContext Injection...OK");
+			Logger.info("%s Injection...OK", clazz.getName());
 			return (T) ctx;
+		}else if (clazz.equals(BrokerService.class)) {
+			Logger.info("%s Injection...OK", clazz.getName());
+			return (T) broker;
 		}
-		Logger.info("CamelContext Injection...KO");
+
+		Logger.info("%s Injection...KO", clazz.getName());
 		return null;
+	}
+	
+	public static BrokerService getBroker(){
+		return broker;
+	}
+	
+	public static CamelContext getCamelContext(){
+		return ctx;
 	}
 	
 }
