@@ -32,15 +32,15 @@ p. Not much to configure, all required settings have defaults values.
 h3. List of properties user can override
 
 table{border:1px solid black}.
-{background:#ccc}.|_.Key|_.Default|_.Description|
-|camel.name|play-camel|Name for the CamelContext object|
-{background:#eee}.|broker.name|play-activemq|Name for the ActiveMQ Broker|
-|broker.connector|tcp://localhost:61616|host:port that will be exposed by the ActiveMQ Connector|
-{background:#eee}.|broker.url|vm:localhost|URL used for instanciating an embedded broker|
+{background:#ccc}.|_.Key|_.Default|_.Description|Required|
+|camel.name|play-camel|Name for the CamelContext object|Optional|
+{background:#eee}.|broker.name|play-activemq|Name for the ActiveMQ Broker|Optional|
+|broker.connector|tcp://localhost:61616|host:port that will be exposed by the ActiveMQ Connector|Optional|
+{background:#eee}.|broker.url|vm:localhost|URL used for instanciating an embedded broker|Optional|
 
 h2. Using @Inject
 
-p. You can inject @CamelContext@ into any class by using "JSR299":http://jcp.org/en/jsr/detail?id=299:
+p. You can inject @CamelContext@ into any class by using "JSR-300":http://code.google.com/p/atinject/:
 
 bc. 
 @Inject
