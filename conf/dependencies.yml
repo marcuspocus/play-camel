@@ -2,29 +2,29 @@ self: play -> camel 1.0
 
 require:
     - play 1.2
-    - rome -> rome 0.9:
-        transitive: false
-        force: true
+#    - rome -> rome 0.9:
+#        transitive: false
+#        force: true
     - org.apache.derby -> derby 10.7.1.1
     - commons-pool -> commons-pool 1.5.5
     - org.apache.activemq -> activemq-core 5.5.0
-    - org.apache.activemq -> activemq-pool 5.5.0
+    - org.apache.activemq -> activemq-camel 5.5.0
     - org.apache.camel -> camel-core 2.7.1
     - org.apache.camel -> components 2.7.1
-    - org.apache.camel -> camel-amqp 2.7.1
-    - org.apache.camel -> camel-activemq 1.1.0:
-        transitive: false
+#    - org.apache.camel -> camel-amqp 2.7.1
     - org.apache.camel -> camel-context 2.7.1
+#    - org.apache.camel -> camel-spring 2.7.1
     - org.apache.camel -> camel-ftp 2.7.1
     - org.apache.camel -> camel-jms 2.7.1
     - org.apache.camel -> camel-mail 2.7.1
-    - org.apache.camel -> camel-routebox 2.7.1
-    - org.apache.camel -> camel-jpa 2.7.1
-    - org.apache.camel -> camel-soap 2.7.1
-    - org.apache.camel -> camel-jetty 2.7.1
+#    - org.apache.camel -> camel-routebox 2.7.1
+#    - org.apache.camel -> camel-jpa 2.7.1
+#    - org.apache.camel -> camel-soap 2.7.1
+#    - org.apache.camel -> camel-jetty 2.7.1
 #    - org.apache.camel -> camel-http 2.7.1
 #    - org.apache.camel -> camel-netty 2.7.1
 #    - org.apache.activemq -> activemq-optional 5.5.0:
+#        transitive: false
 #        exclude:
 #            - net.sf.josql -> gentlyweb-utils 1.5
 #            - net.sf.josql -> josql 1.5

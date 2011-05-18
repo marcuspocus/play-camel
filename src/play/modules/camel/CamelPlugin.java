@@ -1,19 +1,9 @@
 package play.modules.camel;
 
-import java.net.InetSocketAddress;
-import java.net.URI;
+import javax.jms.ConnectionFactory;
 
-import org.apache.activemq.broker.Broker;
-import org.apache.activemq.broker.BrokerContext;
-import org.apache.activemq.broker.BrokerService;
-import org.apache.activemq.broker.TransportConnector;
-import org.apache.activemq.command.BrokerInfo;
-import org.apache.activemq.transport.TransportAcceptListener;
-import org.apache.activemq.transport.TransportServer;
-import org.apache.activemq.transport.TransportServerSupport;
+import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.activemq.ActiveMQComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import play.Logger;
@@ -21,33 +11,27 @@ import play.Play;
 import play.PlayPlugin;
 import play.inject.BeanSource;
 import play.inject.Injector;
+import play.mvc.Http.Request;
+import play.mvc.Http.Response;
+import play.mvc.Router;
+
 
 public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	private static DefaultCamelContext ctx;
-	private static BrokerService broker;
-
+	private static ActiveMQComponent amqc;
+	
 	@Override
 	public void onApplicationStart() {
 		try {
-			if(broker == null){
-				// ActiveMQ
-				broker = new BrokerService();
-				broker.setAdvisorySupport(false);
-				broker.setUseJmx(true);
-				broker.setBrokerName(Play.configuration.getProperty("broker.name", "play-activemq"));
-				broker.addConnector(Play.configuration.getProperty("broker.connector", "nio://localhost:61616"));
-				broker.start();
-				Logger.info("ActiveMQ Broker started...");
-			}
-            if(ctx == null){
+			if (ctx == null) {
 				// Camel
 				ctx = new DefaultCamelContext();
 				ctx.setName(Play.configuration.getProperty("camel.name", "play-camel"));
-				ActiveMQComponent amqc = new ActiveMQComponent(ctx);
+				amqc = new ActiveMQComponent(ctx);
 				amqc.setBrokerURL(Play.configuration.getProperty("broker.url", "vm:localhost"));
 				ctx.start();
-				Logger.info("Camel EIP started...");
+				Logger.info("Camel & ActiveMQ Services are now started...");
 			}
 
 		} catch (Exception e) {
@@ -60,10 +44,10 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 	public void onApplicationStop() {
 		try {
 			ctx.shutdown();
-			while(!ctx.isStopped()){
+			while (!ctx.isStopped()) {
 				Thread.sleep(100);
 			}
-			Logger.info("Camel & ActiveMQ Services are now stopped");
+			Logger.info("Camel & ActiveMQ Services are now stopped\n");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -79,21 +63,33 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 		if (clazz.equals(CamelContext.class)) {
 			Logger.info("%s Injection...OK", clazz.getName());
 			return (T) ctx;
-		}else if (clazz.equals(BrokerService.class)) {
+		} 
+		else if (clazz.equals(ConnectionFactory.class)) {
 			Logger.info("%s Injection...OK", clazz.getName());
-			return (T) broker;
+			return (T) amqc.getConfiguration().getConnectionFactory();
 		}
 
 		Logger.info("%s Injection...KO", clazz.getName());
 		return null;
 	}
+
+    @Override
+    public boolean rawInvocation(Request request, Response response) throws Exception {
+        if ("/@camel".equals(request.path)) {
+            response.status = 302;
+            response.setHeader("Location", "/@camel/");
+            return true;
+        }
+        return false;
+    }
 	
-	public static BrokerService getBroker(){
-		return broker;
-	}
+	@Override
+    public void onRoutesLoaded() {
+        Router.prependRoute("GET", "/@camel/?", "CamelApplication.index");
+    }
 	
 	public static CamelContext getCamelContext(){
 		return ctx;
 	}
-	
+
 }
