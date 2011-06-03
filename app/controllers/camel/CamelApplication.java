@@ -1,4 +1,4 @@
-package controllers;
+package controllers.camel;
 
 import java.util.List;
 
