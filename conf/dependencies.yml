@@ -8,44 +8,44 @@ require:
     - org.apache.activemq -> activemq-core 5.5.0
     - org.apache.activemq -> activemq-camel 5.5.0
     - org.apache.activemq -> activemq-pool 5.5.0
-    - org.apache.camel -> camel-core 2.7.1
-    - org.apache.camel -> components 2.7.1
-    - org.apache.camel -> camel-amqp 2.7.1
-    - org.apache.camel -> camel-context 2.7.1
-    - org.apache.camel -> camel-spring 2.7.1
-    - org.apache.camel -> camel-ftp 2.7.1
-    - org.apache.camel -> camel-jms 2.7.1
-    - org.apache.camel -> camel-mail 2.7.1
-    - org.apache.camel -> camel-netty 2.7.1
-    - org.apache.camel -> camel-hazelcast 2.7.1:
+    - org.apache.camel -> camel-core 2.7.2
+    - org.apache.camel -> components 2.7.2
+    - org.apache.camel -> camel-amqp 2.7.2
+    - org.apache.camel -> camel-context 2.7.2
+    - org.apache.camel -> camel-spring 2.7.2
+    - org.apache.camel -> camel-ftp 2.7.2
+    - org.apache.camel -> camel-jms 2.7.2
+    - org.apache.camel -> camel-mail 2.7.2
+    - org.apache.camel -> camel-netty 2.7.2
+    - org.apache.camel -> camel-hazelcast 2.7.2:
         transitive: false
-#    - org.apache.camel -> camel-routebox 2.7.1
-#    - org.apache.camel -> camel-jpa 2.7.1
-#    - org.apache.camel -> camel-jetty 2.7.1
-#    - org.apache.camel -> camel-http 2.7.1
+#    - org.apache.camel -> camel-routebox 2.7.2
+#    - org.apache.camel -> camel-jpa 2.7.2
+#    - org.apache.camel -> camel-jetty 2.7.2
+#    - org.apache.camel -> camel-http 2.7.2
 #    - org.apache.activemq -> activemq-optional 5.5.0:
 #        transitive: false
 #        exclude:
 #            - net.sf.josql -> gentlyweb-utils 1.5
 #            - net.sf.josql -> josql 1.5
-#    - org.apache.camel -> camel-jmx 2.7.1
-#    - org.apache.camel -> camel-quartz 2.7.1
-#    - org.apache.camel -> camel-csv 2.7.1
-#    - org.apache.camel -> camel-exec 2.7.1
-#    - org.apache.camel -> camel-flatpack 2.7.1
-#    - org.apache.camel -> camel-jcr 2.7.1
-#    - org.apache.camel -> camel-nagios 2.7.1
-#    - org.apache.camel -> camel-jxpath 2.7.1
-#    - org.apache.camel -> camel-spring 2.7.1
-#    - org.apache.camel -> camel-stream 2.7.1
-#    - org.apache.camel -> camel-smpp 2.7.1
-#    - org.apache.camel -> camel-snmp 2.7.1
-#    - org.apache.camel -> camel-soap 2.7.1
-#    - org.apache.camel -> camel-jdbc 2.7.1
-#    - org.apache.camel -> camel-sql 2.7.1
-#    - org.apache.camel -> camel-rss 2.7.1
-#    - org.apache.camel -> camel-ldap 2.7.1
-#    - org.apache.camel -> camel-lucene 2.7.1
+#    - org.apache.camel -> camel-jmx 2.7.2
+#    - org.apache.camel -> camel-quartz 2.7.2
+#    - org.apache.camel -> camel-csv 2.7.2
+#    - org.apache.camel -> camel-exec 2.7.2
+#    - org.apache.camel -> camel-flatpack 2.7.2
+#    - org.apache.camel -> camel-jcr 2.7.2
+#    - org.apache.camel -> camel-nagios 2.7.2
+#    - org.apache.camel -> camel-jxpath 2.7.2
+#    - org.apache.camel -> camel-spring 2.7.2
+#    - org.apache.camel -> camel-stream 2.7.2
+#    - org.apache.camel -> camel-smpp 2.7.2
+#    - org.apache.camel -> camel-snmp 2.7.2
+#    - org.apache.camel -> camel-soap 2.7.2
+#    - org.apache.camel -> camel-jdbc 2.7.2
+#    - org.apache.camel -> camel-sql 2.7.2
+#    - org.apache.camel -> camel-rss 2.7.2
+#    - org.apache.camel -> camel-ldap 2.7.2
+#    - org.apache.camel -> camel-lucene 2.7.2
     - com.hazelcast -> hazelcast 1.9.3:
         transitive: false
     - com.hazelcast -> hazelcast-client 1.9.3:
