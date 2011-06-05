@@ -106,7 +106,7 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	@Override
 	public void onRoutesLoaded() {
-		Router.prependRoute("GET", "/@camel/?", "CamelApplication.index");
+		Router.prependRoute("GET", "/@camel/?", "camel.CamelApplication.index");
 	}
 
 	public static CamelContext getCamelContext() {

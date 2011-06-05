@@ -5,4 +5,4 @@
 #
 # ~~~~
 
-#*		/@camel					CamelApplication.index()
+#*		/@camel/?				camel.CamelApplication.index()
