@@ -30,8 +30,6 @@ public class Injector {
                     	Object o = source.getBeanOfType(type);
                     	if(o != null){
                     		field.set(null, o);
-                    	}else{
-                    		Logger.debug("getBeanOfType(type) is null for type %s in %s", type.getName(), source.getClass().getName()); 
                     	}
                     } catch(RuntimeException e) {
                         throw e;
