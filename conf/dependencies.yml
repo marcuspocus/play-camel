@@ -1,5 +1,5 @@
 # Camel module dependencies
-self: play -> camel 0.1
+self: dev -> camel 0.1
 
 require:
     - play
@@ -10,13 +10,13 @@ require:
     - org.apache.activemq -> activemq-pool 5.5.0
     - org.apache.camel -> camel-core 2.7.2
     - org.apache.camel -> components 2.7.2
-    - org.apache.camel -> camel-amqp 2.7.2
+#    - org.apache.camel -> camel-amqp 2.7.2
     - org.apache.camel -> camel-context 2.7.2
     - org.apache.camel -> camel-spring 2.7.2
     - org.apache.camel -> camel-ftp 2.7.2
     - org.apache.camel -> camel-jms 2.7.2
     - org.apache.camel -> camel-mail 2.7.2
-    - org.apache.camel -> camel-netty 2.7.2
+#    - org.apache.camel -> camel-netty 2.7.2
     - org.apache.camel -> camel-hazelcast 2.7.2:
         transitive: false
 #    - org.apache.camel -> camel-routebox 2.7.2
@@ -46,10 +46,10 @@ require:
 #    - org.apache.camel -> camel-rss 2.7.2
 #    - org.apache.camel -> camel-ldap 2.7.2
 #    - org.apache.camel -> camel-lucene 2.7.2
-    - com.hazelcast -> hazelcast 1.9.3:
-        transitive: false
-    - com.hazelcast -> hazelcast-client 1.9.3:
-        transitive: false
+#    - com.hazelcast -> hazelcast 1.9.3.1:
+#        transitive: false
+#    - com.hazelcast -> hazelcast-client 1.9.3.1:
+#        transitive: false
 
 #    - groovy -> groovy-all 1.0
 #    - mx4j -> mx4j 3.0.2
@@ -61,7 +61,7 @@ require:
 
 exclude:
     - org.apache.derby -> derby 10.1.3.1
-    - com.hazelcast -> hazelcast-all 1.9.3
+    - com.hazelcast -> hazelcast-all 1.9.3.1
     
 repositories:
     - FuseSource:
