@@ -10,12 +10,12 @@ require:
     - org.apache.activemq -> activemq-pool 5.5.0
     - org.apache.camel -> camel-core 2.7.2
     - org.apache.camel -> components 2.7.2
-#    - org.apache.camel -> camel-amqp 2.7.2
     - org.apache.camel -> camel-context 2.7.2
     - org.apache.camel -> camel-spring 2.7.2
     - org.apache.camel -> camel-ftp 2.7.2
     - org.apache.camel -> camel-jms 2.7.2
     - org.apache.camel -> camel-mail 2.7.2
+#    - org.apache.camel -> camel-amqp 2.7.2
 #    - org.apache.camel -> camel-netty 2.7.2
     - org.apache.camel -> camel-hazelcast 2.7.2:
         transitive: false
