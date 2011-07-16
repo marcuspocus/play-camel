@@ -8,5 +8,4 @@ lib
 test-result
 activemq-data
 tmp
-precompile
 precompiled
