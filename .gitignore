@@ -6,3 +6,5 @@ dist
 eclipse
 lib
 test-result
+activemq-data
+tmp

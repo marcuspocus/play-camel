@@ -1,5 +1,5 @@
 # Camel module dependencies
-self: dev -> camel 0.1
+self: play -> camel 0.1
 
 require:
     - play
@@ -11,10 +11,12 @@ require:
     - org.apache.camel -> camel-core 2.7.2
     - org.apache.camel -> components 2.7.2
     - org.apache.camel -> camel-context 2.7.2
-    - org.apache.camel -> camel-spring 2.7.2
-    - org.apache.camel -> camel-ftp 2.7.2
     - org.apache.camel -> camel-jms 2.7.2
-    - org.apache.camel -> camel-mail 2.7.2
+    - se.scalablesolutions.akka -> akka-camel 1.1.3
+    - se.scalablesolutions.akka -> akka-camel-typed 1.1.3
+#    - org.apache.camel -> camel-spring 2.7.2
+#    - org.apache.camel -> camel-ftp 2.7.2
+#    - org.apache.camel -> camel-mail 2.7.2
 #    - org.apache.camel -> camel-amqp 2.7.2
 #    - org.apache.camel -> camel-netty 2.7.2
     - org.apache.camel -> camel-hazelcast 2.7.2:
@@ -74,3 +76,14 @@ repositories:
         root: "http://maven.dspace.org/snapshot/"
         contains:
             - org.apache.activemq -> activeio-core 3.0.0-incubator
+    - akka:
+        type: iBiblio
+        root: "http://akka.io/repository/"
+        contains:
+            - se.scalablesolutions.akka -> *
+            - org.codehaus.aspectwerkz -> aspectwerkz 2.2.3
+    - guicyfruit:
+        type: iBiblio
+        root: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
+        contains:
+            - org.guiceyfruit -> *
