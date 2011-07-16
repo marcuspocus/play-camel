@@ -1,10 +1,8 @@
 package play.modules.camel;
 
-import javax.jms.ConnectionFactory;
-
+import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
-import org.apache.camel.ServiceStatus;
 import org.apache.camel.component.hazelcast.HazelcastComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.springframework.jms.core.JmsTemplate;
@@ -16,27 +14,34 @@ import play.inject.BeanSource;
 import play.mvc.Http.Request;
 import play.mvc.Http.Response;
 import play.mvc.Router;
-
-import akka.actor.Actor;
-import akka.actor.TypedActor;
 import akka.camel.CamelContextManager;
 import akka.camel.CamelServiceManager;
 import akka.camel.component.ActorComponent;
 import akka.camel.component.TypedActorComponent;
-import akka.util.AkkaLoader;
 
 import com.google.gson.JsonObject;
 
 public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	private static DefaultCamelContext ctx;
+	private static BrokerService broker;
 
 	@Override
 	public void onApplicationStart() {
 		try {
-
+			if(broker == null && Play.configuration.containsKey("broker.connector")){
+				Logger.info("Starting Broker Service...");
+				broker = new BrokerService();
+				broker.setAdvisorySupport(false);
+				broker.setUseJmx(true);
+				broker.setBrokerName("play-activemq");
+				broker.addConnector(Play.configuration.getProperty("broker.connector", "nio://localhost:61616"));
+				broker.setEnableStatistics(true);
+				broker.start();
+				Logger.info("Starting Broker Service...OK");
+			}
 			if (ctx == null) {
-				Logger.info("Starting Camel Service is...");
+				Logger.info("Starting Camel Service...");
 				ctx = new DefaultCamelContext();
 				ctx.setName("play-camel");
 
@@ -54,6 +59,7 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				ctx.addComponent("activemq", amqc);
 				Logger.info("Starting ActiveMQComponent...OK");
 				
+				/*
 				Logger.info("Starting ActorComponent...");
 				ActorComponent ac = new ActorComponent(); 
 				ac.setCamelContext(ctx);
@@ -67,7 +73,7 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				tac.start();
 				ctx.addComponent("TypedActor", tac);
 				Logger.info("Starting TypedActorComponent...OK");
-
+				*/
 				Logger.info("Starting HazelcastComponent...");
 				HazelcastComponent hazel = new HazelcastComponent(ctx);
 				hazel.start();
@@ -98,6 +104,7 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	@Override
 	public void onApplicationStop() {
+		Logger.info("Stopping Camel Services...");
 		try {
 			CamelServiceManager.stopCamelService();
 		} catch (Exception e) {
@@ -109,16 +116,22 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 		} catch (Exception e) {
 		}
 		try {
+			broker.stop();
+			while(broker.isStarted()){
+				Thread.sleep(1000);
+			}
+			broker = null;
+		} catch (Exception e) {
+		}
+		try {
 			ctx.shutdown();
 			while (!ctx.isStopped()) {
 				Thread.sleep(100);
-				Logger.info("Stopping Camel...");
 			}
 			ctx = null;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		Logger.info("Camel Services are now stopped\n");
+		Logger.info("Stopping Camel Services...OK");
 	}
 
 	/*
@@ -143,14 +156,6 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 		return ctx.getComponent("activemq", ActiveMQComponent.class);
 	}
 
-	private static TypedActorComponent getTypedActorComponent() {
-		return ctx.getComponent("TypedActor", TypedActorComponent.class);
-	}
-	
-	public static void registerTypedActor(String key, Object actor){
-		getTypedActorComponent().typedActorRegistry().putIfAbsent(key, actor);
-	}
-	
 	@Override
 	public boolean rawInvocation(Request request, Response response) throws Exception {
 		if ("/@camel".equals(request.path)) {
@@ -168,6 +173,10 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	public static CamelContext getCamelContext() {
 		return ctx;
+	}
+
+	public static BrokerService getBroker() {
+		return broker;
 	}
 
 	public static JmsTemplate getJmsTemplate() {
