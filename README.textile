@@ -33,9 +33,7 @@ h3. List of properties user can override
 
 table{border:1px solid black}.
 {background:#ccc}.|_.Key|_.Default|_.Description|Required|
-|camel.name|play-camel|Name for the CamelContext object|Optional|
-{background:#eee}.|broker.name|play-activemq|Name for the ActiveMQ Broker|Optional|
-|broker.connector|tcp://localhost:61616|host:port that will be exposed by the ActiveMQ Connector|Optional|
+|broker.connector|none (ex.: tcp://localhost:61616)|host:port that will be exposed by the ActiveMQ Connector|Optional|
 {background:#eee}.|broker.url|vm:localhost|URL used for instanciating an embedded broker|Optional|
 
 h2. Using @Inject
