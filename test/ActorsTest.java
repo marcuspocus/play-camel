@@ -56,6 +56,12 @@ public class ActorsTest extends UnitTest{
 			ctx.removeRoute("testReply");
 		} catch (Exception e) {
 		}
+		try {
+			for(Endpoint e : ctx.getEndpoints()){
+				e.stop();
+			}
+		} catch (Exception e) {
+		}
 	}
 	
 	@Test
@@ -66,6 +72,7 @@ public class ActorsTest extends UnitTest{
 			
 			assertEquals("result: test", actor.sendRequestReply(new Message("test")));
 			
+			actor.stop();
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -90,6 +97,8 @@ public class ActorsTest extends UnitTest{
 			String response = (String) ctx.createProducerTemplate().requestBody(endpoint, "test");
 			assertEquals("result: test", response);
 			
+			actor.stop();
+
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -113,6 +122,8 @@ public class ActorsTest extends UnitTest{
 			String response = (String) ctx.createProducerTemplate().requestBody(endpoint, "test");
 			assertEquals("result: test", response);
 			
+			actor.stop();
+
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -140,6 +151,8 @@ public class ActorsTest extends UnitTest{
 					return session.createTextMessage("test");
 				}
 			});
+
+			actor.stop();
 
 		}catch(Exception e){
 			fail(e.getMessage());

@@ -9,6 +9,7 @@ import javax.jms.Message;
 import javax.jms.Session;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -56,24 +57,26 @@ public class RoutesTest extends UnitTest {
 		try {
 			ctx.stopRoute("inbox");
 		} catch (Exception e) {
-			fail(e.getMessage());
 		}
 		
 		try {
 			ctx.removeRoute("inbox");
 		} catch (Exception e) {
-			fail(e.getMessage());
 		}
 		try {
 			ctx.stopRoute("jms");
 		} catch (Exception e) {
-			fail(e.getMessage());
 		}
 		
 		try {
 			ctx.removeRoute("jms");
 		} catch (Exception e) {
-			fail(e.getMessage());
+		}
+		try {
+			for(Endpoint e : ctx.getEndpoints()){
+				e.stop();
+			}
+		} catch (Exception e) {
 		}
 	}
 	
