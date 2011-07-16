@@ -59,21 +59,6 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				ctx.addComponent("activemq", amqc);
 				Logger.info("Starting ActiveMQComponent...OK");
 				
-				/*
-				Logger.info("Starting ActorComponent...");
-				ActorComponent ac = new ActorComponent(); 
-				ac.setCamelContext(ctx);
-				ac.start();
-				ctx.addComponent("Actor", ac);
-				Logger.info("Starting ActorComponent...OK");
-				
-				Logger.info("Starting TypedActorComponent...");
-				TypedActorComponent tac = new TypedActorComponent();
-				tac.setCamelContext(ctx);
-				tac.start();
-				ctx.addComponent("TypedActor", tac);
-				Logger.info("Starting TypedActorComponent...OK");
-				*/
 				Logger.info("Starting HazelcastComponent...");
 				HazelcastComponent hazel = new HazelcastComponent(ctx);
 				hazel.start();
