@@ -1,10 +1,28 @@
 #{extends 'main.html' /}
-#{set title:'Camel' /}
-  
-<h1>Test</h1>
+#{set title: 'Camel | ' + name + ' ('+ version + ')' /}
+
+<h1>${name} (${version}) : ${uptime} uptime</h1>
+
+<h2>Components</h2>
+      
+<ul>
+	#{list items:components, as:'item'}
+            <li>${item}</li>
+	#{/list}	
+</ul>
+
+<h2>Routes</h2>
       
 <ul>
 	#{list items:routes, as:'route'}
             <li>${route.id} : ${route.getEndpoint().endpointKey} : ${route.getEndpoint().endpointUri}</li>
+	#{/list}	
+</ul>
+
+<h2>Endpoints</h2>
+
+<ul>
+	#{list items:endpoints, as:'item'}
+            <li>${item.endpointKey}</li>
 	#{/list}	
 </ul>
