@@ -13,17 +13,17 @@ h2. Installing module
 
 * Using conf/dependencies.yaml and adding a dependency: 
 
-bc. play -> camel 1.0
+bc. play -> camel [version]
 
 * Using conf/application.conf and adding a module: 
 
-bc. module.camel=${play.path}/modules/camel-1.0
+bc. module.camel=${play.path}/modules/camel-[version]
 
 h2. Getting dependencies
 
-p. You need to *{color:red}make sure you are able to retreive all dependencies* for this module, or it won't work. Dependencies are fetched from mavenCentral and "Maven Dev Space":http://maven.dspace.org/snapshot/
+p. You need to *{color:red}make sure you are able to retreive all dependencies* for this module, or it won't work.
 
-bc. play dependencies --sync
+bc. play deps --sync
 
 h2. Configuring
 
@@ -38,7 +38,7 @@ table{border:1px solid black}.
 
 h2. Using @Inject
 
-p. You can inject @CamelContext@ into any class by using "JSR-300":http://code.google.com/p/atinject/:
+p. You can inject @CamelContext@ into any class by using "JSR-330":http://code.google.com/p/atinject/:
 
 bc. 
 @Inject
@@ -58,7 +58,6 @@ p. In the previous class in which you injected @CamelContext@, you can then use 
 
 * Java
 * Scala
-* Spring XML[1]
 
 h3. RouteBuilder : Where it all begin...
 
@@ -84,13 +83,9 @@ bc.
 // Add them to camel-context
 ctx.addRoutes(routes);
 
-
 h2. Conclusion
 
 p. *You now have a fully fonctionning EIP + an embedded JMS Broker right on your Play! application*.
 
 ??Have fun ;-)??, Marc
 
-
-
-fn1. Notes : This module support only Java DSL for now.
