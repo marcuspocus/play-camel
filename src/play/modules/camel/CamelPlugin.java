@@ -16,8 +16,6 @@ import play.mvc.Http.Response;
 import play.mvc.Router;
 import akka.camel.CamelContextManager;
 import akka.camel.CamelServiceManager;
-import akka.camel.component.ActorComponent;
-import akka.camel.component.TypedActorComponent;
 
 import com.google.gson.JsonObject;
 
