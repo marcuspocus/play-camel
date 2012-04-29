@@ -1,24 +1,15 @@
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-
+import actors.MyActorImpl;
+import akka.actor.ActorRef;
+import akka.actor.Actors;
+import akka.camel.Message;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.builder.RouteBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
-import org.springframework.jms.core.ProducerCallback;
-
 import play.modules.camel.CamelPlugin;
 import play.test.UnitTest;
-import actors.MyActorImpl;
-import akka.actor.ActorRef;
-import akka.actor.Actors;
-import akka.camel.Message;
 
 public class ActorsTest extends UnitTest{
 	
@@ -38,14 +29,6 @@ public class ActorsTest extends UnitTest{
 		}
 		try {
 			ctx.removeRoute("test");
-		} catch (Exception e) {
-		}
-		try {
-			ctx.stopRoute("jms");
-		} catch (Exception e) {
-		}
-		try {
-			ctx.removeRoute("jms");
 		} catch (Exception e) {
 		}
 		try {
@@ -129,7 +112,7 @@ public class ActorsTest extends UnitTest{
 		}
 	}
 	
-	@Test
+	/*
 	public void testJmsToActor(){
 		try {
 			ActorRef actor = Actors.actorOf(MyActorImpl.class);
@@ -157,6 +140,7 @@ public class ActorsTest extends UnitTest{
 		}catch(Exception e){
 			fail(e.getMessage());
 		}
-		
 	}
+	*/
+
 }

@@ -10,3 +10,6 @@ activemq-data
 tmp
 precompiled
 logs
+camel.iml
+camel.ipr
+camel.iws

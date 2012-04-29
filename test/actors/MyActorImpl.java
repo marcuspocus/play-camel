@@ -2,7 +2,6 @@ package actors;
 
 import akka.actor.UntypedActor;
 import akka.camel.Message;
-import akka.camel.UntypedProducerActor;
 
 public class MyActorImpl extends UntypedActor {
 
