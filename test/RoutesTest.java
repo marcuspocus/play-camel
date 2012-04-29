@@ -1,30 +1,15 @@
-import java.util.Date;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
-import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mock.MockEndpoint;
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
-
 import play.Logger;
 import play.modules.camel.CamelPlugin;
 import play.test.UnitTest;
-import play.utils.Utils;
-import play.vfs.VirtualFile;
+
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 
 public class RoutesTest extends UnitTest {
@@ -40,7 +25,7 @@ public class RoutesTest extends UnitTest {
 			@Override
 			public void configure() throws Exception {
 				from("direct:start").id("inbox").to("log:inbox").to("mock:inbox");
-				from("activemq:test").id("jms").to("direct:start");
+				// from("activemq:test").id("jms").to("direct:start");
 			}
 		};
 		
@@ -64,15 +49,6 @@ public class RoutesTest extends UnitTest {
 		} catch (Exception e) {
 		}
 		try {
-			ctx.stopRoute("jms");
-		} catch (Exception e) {
-		}
-		
-		try {
-			ctx.removeRoute("jms");
-		} catch (Exception e) {
-		}
-		try {
 			for(Endpoint e : ctx.getEndpoints()){
 				e.stop();
 			}
@@ -85,7 +61,7 @@ public class RoutesTest extends UnitTest {
 		ctx.createProducerTemplate().sendBody(ctx.getEndpoint("direct:start"), "test:testDirectRoutes");
 	}
 
-	@Test
+	/*
 	public void testSendWithJmsTemplate(){
 		JmsTemplate jms = CamelPlugin.getJmsTemplate();
 		jms.send("activemq:test", new MessageCreator() {
@@ -94,6 +70,7 @@ public class RoutesTest extends UnitTest {
 			}
 		});
 	}
+	*/
 	
 	@Test
 	public void testSendAsync(){

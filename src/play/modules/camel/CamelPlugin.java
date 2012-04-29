@@ -1,64 +1,30 @@
 package play.modules.camel;
 
-import org.apache.activemq.broker.BrokerService;
-import org.apache.activemq.camel.component.ActiveMQComponent;
+import akka.camel.CamelContextManager;
+import akka.camel.CamelServiceManager;
+import com.google.gson.JsonObject;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.hazelcast.HazelcastComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.springframework.jms.core.JmsTemplate;
-
 import play.Logger;
-import play.Play;
 import play.PlayPlugin;
 import play.inject.BeanSource;
 import play.mvc.Http.Request;
 import play.mvc.Http.Response;
 import play.mvc.Router;
-import akka.camel.CamelContextManager;
-import akka.camel.CamelServiceManager;
-import akka.camel.component.ActorComponent;
-import akka.camel.component.TypedActorComponent;
-
-import com.google.gson.JsonObject;
 
 public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	private static DefaultCamelContext ctx;
-	private static BrokerService broker;
 
 	@Override
 	public void onApplicationStart() {
 		try {
-			if(broker == null && Play.configuration.containsKey("broker.connector")){
-				Logger.info("Starting Broker Service...");
-				broker = new BrokerService();
-				broker.setAdvisorySupport(false);
-				broker.setUseJmx(true);
-				broker.setBrokerName("play-activemq");
-				broker.addConnector(Play.configuration.getProperty("broker.connector", "nio://localhost:61616"));
-				broker.setEnableStatistics(true);
-				broker.start();
-				Logger.info("Starting Broker Service...OK");
-			}
 			if (ctx == null) {
 				Logger.info("Starting Camel Service...");
 				ctx = new DefaultCamelContext();
 				ctx.setName("play-camel");
 
-				Logger.info("Starting ActiveMQComponent...");
-				ActiveMQComponent amqc = new ActiveMQComponent(ctx);
-				String brokerURL = Play.configuration.getProperty("broker.url", "vm://localhost");
-				amqc.setBrokerURL(brokerURL);
-				amqc.setUsePooledConnection(true);
-				amqc.setMessageIdEnabled(true);
-				amqc.setMessageTimestampEnabled(true);
-				amqc.setTestConnectionOnStartup(true);
-				amqc.setTransacted(true);
-				amqc.setAutoStartup(true);
-				amqc.start();
-				ctx.addComponent("activemq", amqc);
-				Logger.info("Starting ActiveMQComponent...OK");
-				
 				Logger.info("Starting HazelcastComponent...");
 				HazelcastComponent hazel = new HazelcastComponent(ctx);
 				hazel.start();
@@ -101,14 +67,6 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 		} catch (Exception e) {
 		}
 		try {
-			broker.stop();
-			while(broker.isStarted()){
-				Thread.sleep(1000);
-			}
-			broker = null;
-		} catch (Exception e) {
-		}
-		try {
 			ctx.shutdown();
 			while (!ctx.isStopped()) {
 				Thread.sleep(100);
@@ -129,16 +87,9 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 		if (clazz.equals(CamelContext.class)) {
 			Logger.info("%s Injection...OK", clazz.getName());
 			return (T) ctx;
-		} else if (clazz.equals(JmsTemplate.class)) {
-			Logger.info("%s Injection...OK", clazz.getName());
-			return (T) getJmsTemplate();
 		} else {
 			return null;
 		}
-	}
-
-	private  static ActiveMQComponent getActiveMQComponent() {
-		return ctx.getComponent("activemq", ActiveMQComponent.class);
 	}
 
 	@Override
@@ -158,14 +109,6 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 
 	public static CamelContext getCamelContext() {
 		return ctx;
-	}
-
-	public static BrokerService getBroker() {
-		return broker;
-	}
-
-	public static JmsTemplate getJmsTemplate() {
-		return new JmsTemplate(getActiveMQComponent().getConfiguration().getConnectionFactory());
 	}
 
 	public String getStatus() {

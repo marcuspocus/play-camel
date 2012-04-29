@@ -9,3 +9,5 @@ test-result
 activemq-data
 tmp
 precompiled
+camel.iml
+camel.ipr
