@@ -4,7 +4,6 @@ import akka.camel.CamelContextManager;
 import akka.camel.CamelServiceManager;
 import com.google.gson.JsonObject;
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.hazelcast.HazelcastComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 import play.Logger;
 import play.PlayPlugin;
@@ -12,6 +11,8 @@ import play.inject.BeanSource;
 import play.mvc.Http.Request;
 import play.mvc.Http.Response;
 import play.mvc.Router;
+
+import java.util.concurrent.TimeUnit;
 
 public class CamelPlugin extends PlayPlugin implements BeanSource {
 
@@ -24,14 +25,10 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				Logger.info("Starting Camel Service...");
 				ctx = new DefaultCamelContext();
 				ctx.setName("play-camel");
+                ctx.getShutdownStrategy().setTimeout(60);
+                ctx.getShutdownStrategy().setTimeUnit(TimeUnit.SECONDS);
 
-				//Logger.info("Starting HazelcastComponent...");
-				//HazelcastComponent hazel = new HazelcastComponent(ctx);
-				//hazel.start();
-				//ctx.addComponent("hazelcast", hazel);
-				//Logger.info("Starting HazelcastComponent...OK");
-
-				ctx.start();
+                ctx.start();
 				Logger.info("Starting Camel Service...OK");
 			}
 
