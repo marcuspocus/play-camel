@@ -25,11 +25,11 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
 				ctx = new DefaultCamelContext();
 				ctx.setName("play-camel");
 
-				Logger.info("Starting HazelcastComponent...");
-				HazelcastComponent hazel = new HazelcastComponent(ctx);
-				hazel.start();
-				ctx.addComponent("hazelcast", hazel);
-				Logger.info("Starting HazelcastComponent...OK");
+				//Logger.info("Starting HazelcastComponent...");
+				//HazelcastComponent hazel = new HazelcastComponent(ctx);
+				//hazel.start();
+				//ctx.addComponent("hazelcast", hazel);
+				//Logger.info("Starting HazelcastComponent...OK");
 
 				ctx.start();
 				Logger.info("Starting Camel Service...OK");
