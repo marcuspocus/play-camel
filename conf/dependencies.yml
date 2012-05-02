@@ -19,8 +19,8 @@ require:
 #    - org.apache.camel -> camel-mail 2.7.2
 #    - org.apache.camel -> camel-amqp 2.7.2
 #    - org.apache.camel -> camel-netty 2.7.2
-#    - org.apache.camel -> camel-hazelcast 2.7.2:
-#        transitive: false
+    - org.apache.camel -> camel-hazelcast 2.7.2:
+        transitive: false
 #    - org.apache.camel -> camel-routebox 2.7.2
 #    - org.apache.camel -> camel-jpa 2.7.2
 #    - org.apache.camel -> camel-jetty 2.7.2
