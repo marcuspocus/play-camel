@@ -35,6 +35,7 @@ table{border:1px solid black}.
 {background:#ccc}.|_.Key|_.Default|_.Description|Required|
 |broker.connector|none (ex.: tcp://localhost:61616)|host:port that will be exposed by the ActiveMQ Connector|Optional|
 {background:#eee}.|broker.url|vm:localhost|URL used for instanciating an embedded broker|Optional|
+|camel.hazelcast|none|whether to start Hazelcast as component or not (default: not)|Optional|
 
 h2. Using @Inject
 

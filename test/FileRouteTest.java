@@ -13,7 +13,7 @@ public class FileRouteTest extends UnitTest{
 			
 			@Override
 			public void configure() throws Exception {
-				from("file:///Users/marcus/tmp/msgs").convertBodyTo(String.class).to("file:///Users/marcus/tmp/outbox");
+				from("file:///tmp/msgs").convertBodyTo(String.class).to("file:///tmp/outbox");
 			}
 		};
 		
