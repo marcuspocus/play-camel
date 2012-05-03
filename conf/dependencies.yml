@@ -16,12 +16,12 @@ require:
     - org.apache.camel -> camel-context 2.9.2
     - org.apache.camel -> camel-jms 2.9.2
     - org.apache.camel -> camel-mail 2.9.2
+    - org.apache.camel -> camel-hazelcast 2.9.2:
+        transitive: false
 #    - org.apache.camel -> camel-spring 2.9.2
 #    - org.apache.camel -> camel-ftp 2.9.2
 #    - org.apache.camel -> camel-amqp 2.9.2
 #    - org.apache.camel -> camel-netty 2.9.2
-#    - org.apache.camel -> camel-hazelcast 2.9.2:
-#        transitive: false
 #    - org.apache.camel -> camel-routebox 2.9.2
 #    - org.apache.camel -> camel-jpa 2.9.2
 #    - org.apache.camel -> camel-jetty 2.9.2
