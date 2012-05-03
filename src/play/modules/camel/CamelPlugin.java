@@ -14,7 +14,7 @@ import play.mvc.Router;
 import akka.camel.CamelContextManager;
 import akka.camel.CamelServiceManager;
 
-import com.google.gson.JsonObject;
+import java.util.concurrent.TimeUnit;
 
 import java.util.concurrent.TimeUnit;
 
