@@ -8,8 +8,13 @@ import org.apache.camel.builder.RouteBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import play.modules.camel.CamelPlugin;
 import play.test.UnitTest;
+
+import javax.jms.JMSException;
+import javax.jms.Session;
 
 public class ActorsTest extends UnitTest{
 	
@@ -112,7 +117,7 @@ public class ActorsTest extends UnitTest{
 		}
 	}
 	
-	/*
+	@Test
 	public void testJmsToActor(){
 		try {
 			ActorRef actor = Actors.actorOf(MyActorImpl.class);
@@ -141,6 +146,5 @@ public class ActorsTest extends UnitTest{
 			fail(e.getMessage());
 		}
 	}
-	*/
 
 }
