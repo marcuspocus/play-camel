@@ -43,21 +43,19 @@ public class CamelPlugin extends PlayPlugin implements BeanSource {
                 ctx = new DefaultCamelContext();
                 ctx.setName("play-camel");
 
-                if (broker != null) {
-                    Logger.info("Starting ActiveMQComponent...");
-                    ActiveMQComponent amqc = new ActiveMQComponent(ctx);
-                    String brokerURL = Play.configuration.getProperty("broker.url", "vm://localhost");
-                    amqc.setBrokerURL(brokerURL);
-                    amqc.setUsePooledConnection(true);
-                    amqc.setMessageIdEnabled(true);
-                    amqc.setMessageTimestampEnabled(true);
-                    amqc.setTestConnectionOnStartup(true);
-                    amqc.setTransacted(true);
-                    amqc.setAutoStartup(true);
-                    amqc.start();
-                    ctx.addComponent("activemq", amqc);
-                    Logger.info("Starting ActiveMQComponent...OK");
-                }
+                Logger.info("Starting ActiveMQComponent...");
+                ActiveMQComponent amqc = new ActiveMQComponent(ctx);
+                String brokerURL = Play.configuration.getProperty("broker.url", "vm://localhost");
+                amqc.setBrokerURL(brokerURL);
+                amqc.setUsePooledConnection(true);
+                amqc.setMessageIdEnabled(true);
+                amqc.setMessageTimestampEnabled(true);
+                amqc.setTestConnectionOnStartup(true);
+                amqc.setTransacted(true);
+                amqc.setAutoStartup(true);
+                amqc.start();
+                ctx.addComponent("activemq", amqc);
+                Logger.info("Starting ActiveMQComponent...OK");
 
                 if (Play.configuration.containsKey("camel.hazelcast")) {
                     Logger.info("Starting HazelcastComponent...");
