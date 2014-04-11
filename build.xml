@@ -3,7 +3,7 @@
 <project name="camel" default="build" basedir=".">
     
 	<property environment="env" />
-	<property name="play.path" value="${env.PLAY_HOME}" />
+	<property name="play.path" location="${env.PLAY_HOME}" />
 	
     <target name="check" unless="play.path">
         <fail message="Please specify Play framework path using -Dplay.path=/path/to/framework/home" />
