@@ -1,5 +1,5 @@
 # Camel module dependencies
-self: play -> camel 0.2
+self: play -> camel 0.2.1
 
 require:
     - play
