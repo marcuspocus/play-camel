@@ -3,9 +3,9 @@ package play.modules.camel;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+
 import javax.inject.Inject;
 
-import play.Logger;
 import play.Play;
 import play.classloading.enhancers.ControllersEnhancer.ControllerSupport;
 import play.inject.BeanSource;

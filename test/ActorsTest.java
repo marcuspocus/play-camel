@@ -61,7 +61,8 @@ public class ActorsTest extends UnitTest{
         }
     }
 
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void testActorSendRequestReply(){
         try {
             ActorRef actor = Actors.actorOf(MyActorImpl.class);
