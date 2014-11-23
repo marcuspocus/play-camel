@@ -1,59 +1,54 @@
 # Camel module dependencies
-self: play -> camel 0.2.1
+self: play -> camel 1.0
 
 require:
     - play
-    - commons-pool -> commons-pool 1.6
+    - commons-pool -> commons-pool 1.5.5
     # ActiveMQ
-    - org.apache.activemq -> activemq-core 5.7.0:
-        exclude:
-            - org.apache.derby -> derby 10.9.1.0
-            - xalan -> xalan 2.7.1
-            - xalan -> xalan-serializer 2.7.1
-            - xml-apis -> xml-apis 1.3.04
-    - org.apache.activemq -> activemq-camel 5.7.0
+    - org.apache.activemq -> activemq-core 5.5.0
+    - org.apache.activemq -> activemq-camel 5.5.0
     # Akka
     - se.scalablesolutions.akka -> akka-camel 1.3.1
     - se.scalablesolutions.akka -> akka-camel-typed 1.3.1
     # Camel
-    - org.apache.camel -> camel-core 2.13.0
-    - org.apache.camel -> components 2.13.0
-    - org.apache.camel -> camel-context 2.13.0
-    - org.apache.camel -> camel-jms 2.13.0
-    - org.apache.camel -> camel-mail 2.13.0
-    - org.apache.camel -> camel-hazelcast 2.13.0:
+    - org.apache.camel -> camel-core 2.9.2
+    - org.apache.camel -> components 2.9.2
+    - org.apache.camel -> camel-context 2.9.2
+    - org.apache.camel -> camel-jms 2.9.2
+    - org.apache.camel -> camel-mail 2.9.2
+    - org.apache.camel -> camel-hazelcast 2.9.2:
         transitive: false
-#    - org.apache.camel -> camel-spring 2.13.0
-#    - org.apache.camel -> camel-ftp 2.13.0
-#    - org.apache.camel -> camel-amqp 2.13.0
-#    - org.apache.camel -> camel-netty 2.13.0
-#    - org.apache.camel -> camel-routebox 2.13.0
-#    - org.apache.camel -> camel-jpa 2.13.0
-#    - org.apache.camel -> camel-jetty 2.13.0
-#    - org.apache.camel -> camel-http 2.13.0
+#    - org.apache.camel -> camel-spring 2.9.2
+#    - org.apache.camel -> camel-ftp 2.9.2
+#    - org.apache.camel -> camel-amqp 2.9.2
+#    - org.apache.camel -> camel-netty 2.9.2
+#    - org.apache.camel -> camel-routebox 2.9.2
+#    - org.apache.camel -> camel-jpa 2.9.2
+#    - org.apache.camel -> camel-jetty 2.9.2
+#    - org.apache.camel -> camel-http 2.9.2
 #    - org.apache.activemq -> activemq-optional 5.5.0:
 #        transitive: false
 #        exclude:
 #            - net.sf.josql -> gentlyweb-utils 1.5
 #            - net.sf.josql -> josql 1.5
-#    - org.apache.camel -> camel-jmx 2.13.0
-#    - org.apache.camel -> camel-quartz 2.13.0
-#    - org.apache.camel -> camel-csv 2.13.0
-#    - org.apache.camel -> camel-exec 2.13.0
-#    - org.apache.camel -> camel-flatpack 2.13.0
-#    - org.apache.camel -> camel-jcr 2.13.0
-#    - org.apache.camel -> camel-nagios 2.13.0
-#    - org.apache.camel -> camel-jxpath 2.13.0
-#    - org.apache.camel -> camel-spring 2.13.0
-#    - org.apache.camel -> camel-stream 2.13.0
-#    - org.apache.camel -> camel-smpp 2.13.0
-#    - org.apache.camel -> camel-snmp 2.13.0
-#    - org.apache.camel -> camel-soap 2.13.0
-#    - org.apache.camel -> camel-jdbc 2.13.0
-#    - org.apache.camel -> camel-sql 2.13.0
-#    - org.apache.camel -> camel-rss 2.13.0
-#    - org.apache.camel -> camel-ldap 2.13.0
-#    - org.apache.camel -> camel-lucene 2.13.0
+#    - org.apache.camel -> camel-jmx 2.9.2
+#    - org.apache.camel -> camel-quartz 2.9.2
+#    - org.apache.camel -> camel-csv 2.9.2
+#    - org.apache.camel -> camel-exec 2.9.2
+#    - org.apache.camel -> camel-flatpack 2.9.2
+#    - org.apache.camel -> camel-jcr 2.9.2
+#    - org.apache.camel -> camel-nagios 2.9.2
+#    - org.apache.camel -> camel-jxpath 2.9.2
+#    - org.apache.camel -> camel-spring 2.9.2
+#    - org.apache.camel -> camel-stream 2.9.2
+#    - org.apache.camel -> camel-smpp 2.9.2
+#    - org.apache.camel -> camel-snmp 2.9.2
+#    - org.apache.camel -> camel-soap 2.9.2
+#    - org.apache.camel -> camel-jdbc 2.9.2
+#    - org.apache.camel -> camel-sql 2.9.2
+#    - org.apache.camel -> camel-rss 2.9.2
+#    - org.apache.camel -> camel-ldap 2.9.2
+#    - org.apache.camel -> camel-lucene 2.9.2
 #    - groovy -> groovy-all 1.0
 #    - mx4j -> mx4j 3.0.2
 #    - mx4j -> mx4j-tools 3.0.1
@@ -63,9 +58,9 @@ require:
 #        force: true
 
 exclude:
-    - org.apache.derby -> derby 10.9.1.0
+    - org.apache.derby -> derby 10.1.3.1
     - com.hazelcast -> hazelcast-all 1.9.3.1
-
+    
 repositories:
     - FuseSource:
         type: iBiblio

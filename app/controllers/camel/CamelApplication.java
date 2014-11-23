@@ -3,15 +3,9 @@ package controllers.camel;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.Route;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.RouteBuilder;
 
-import play.Logger;
 import play.modules.camel.CamelPlugin;
 import play.mvc.Controller;
 

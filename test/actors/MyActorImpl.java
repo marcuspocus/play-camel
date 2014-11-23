@@ -5,6 +5,7 @@ import akka.camel.Message;
 
 public class MyActorImpl extends UntypedActor {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onReceive(Object o) {
 		Message m = (Message) o;
