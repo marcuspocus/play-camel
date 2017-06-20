@@ -1,22 +1,28 @@
 # Camel module dependencies
-self: play -> camel 1.1
+self: play -> camel 1.2.1
 
 require:
-    - play
+    - play 1.4.4
     - commons-pool -> commons-pool 1.5.5
     # ActiveMQ
-    - org.apache.activemq -> activemq-core 5.5.0
-    - org.apache.activemq -> activemq-camel 5.5.0
+    - org.apache.activemq -> activemq-core 5.7.0:
+        exclude:
+            - org.apache.derby -> derby 10.9.1.0
+            - xalan -> xalan 2.7.1
+            - xalan -> xalan-serializer 2.7.1
+            - xml-apis -> xml-apis 1.3.04
+            - groovy -> groovy-all 1.0-jsr-03
+    - org.apache.activemq -> activemq-camel 5.7.0
     # Akka
     - se.scalablesolutions.akka -> akka-camel 1.3.1
     - se.scalablesolutions.akka -> akka-camel-typed 1.3.1
     # Camel
-    - org.apache.camel -> camel-core 2.9.2
-    - org.apache.camel -> components 2.9.2
-    - org.apache.camel -> camel-context 2.9.2
-    - org.apache.camel -> camel-jms 2.9.2
-    - org.apache.camel -> camel-mail 2.9.2
-    - org.apache.camel -> camel-hazelcast 2.9.2:
+    - org.apache.camel -> camel-core 2.19.1
+    - org.apache.camel -> components 2.19.1
+    - org.apache.camel -> camel-context 2.19.1
+    - org.apache.camel -> camel-jms 2.19.1
+    - org.apache.camel -> camel-mail 2.19.1
+    - org.apache.camel -> camel-hazelcast 2.19.1:
         transitive: false
 #    - org.apache.camel -> camel-spring 2.9.2
 #    - org.apache.camel -> camel-ftp 2.9.2
