@@ -2,10 +2,11 @@ package play.modules.camel;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 
-import play.Logger;
 import play.Play;
 import play.classloading.enhancers.ControllersEnhancer.ControllerSupport;
 import play.inject.BeanSource;
@@ -18,7 +19,8 @@ public class Injector {
      * For now, inject beans in controllers
      */
     public static void inject(BeanSource source) {
-        List<Class> classes = Play.classloader.getAssignableClasses(ControllerSupport.class);
+        List<Class> classes = new ArrayList<Class>();
+        classes.addAll(Play.classloader.getAssignableClasses(ControllerSupport.class));
         classes.addAll(Play.classloader.getAssignableClasses(Mailer.class));
         classes.addAll(Play.classloader.getAssignableClasses(Job.class));
         for(Class<?> clazz : classes) {
